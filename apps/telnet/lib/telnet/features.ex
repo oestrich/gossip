@@ -40,9 +40,17 @@ defmodule GrapevineTelnet.Features do
   """
   def cache_message(state, message, data)
 
+  def cache_message(state, "Client.Media.Default", data) do
+    force_cache_message(state, "Client.Media.Default", data)
+  end
+
+  def cache_message(state, "Client.Media" <> _, _data), do: state
+
   def cache_message(state, "Client.Modals" <> _, _data), do: state
 
-  def cache_message(state, message, data) do
+  def cache_message(state, message, data), do: force_cache_message(state, message, data)
+
+  defp force_cache_message(state, message, data) do
     cache = Map.put(state.features.message_cache, message, data)
     features = Map.put(state.features, :message_cache, cache)
     Map.put(state, :features, features)
@@ -92,10 +100,18 @@ defmodule GrapevineTelnet.Features do
   @doc """
   Base packages that the client will try to turn on
   """
-  def base_packages(), do: ["Client.Modals 1"]
+  def base_packages(), do: ["Client.Modals 1", "Client.Media 1"]
 
   @doc """
   Base messages that are known for the client
   """
-  def base_messagse(), do: ["Client.Modals.Open"]
+  def base_messagse() do
+    [
+      "Client.Modals.Open",
+      "Client.Media.Default",
+      "Client.Media.Load",
+      "Client.Media.Play",
+      "Client.Media.Stop"
+    ]
+  end
 end

@@ -1,5 +1,6 @@
 import {combineReducers, createStore, compose} from 'redux';
 
+import {mediaReducer} from "./mediaReducer";
 import {modalReducer} from "./modalReducer";
 import {promptReducer} from "./promptReducer";
 import {settingsReducer} from "./settingsReducer";
@@ -93,6 +94,7 @@ export const getVoiceVoices = (state) => {
 // Reducers
 
 let rootReducer = combineReducers({
+  media: mediaReducer,
   modal: modalReducer,
   prompt: promptReducer,
   settings: settingsReducer,
