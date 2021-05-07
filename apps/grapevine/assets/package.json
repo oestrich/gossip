@@ -27,7 +27,7 @@
     "sass-loader": "^8.0.0",
     "sizzle": "^2.3.3",
     "style-loader": "^1.0.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
